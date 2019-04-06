@@ -25,7 +25,7 @@ PhysicalNumber PhysicalNumber::operator+(const PhysicalNumber &b)
 {
   if (this->type != b.type)
   {
-    __throw_exception_again;
+    throw "NOT THE SAME TYPE";
   }
 
   int val = this->value * multby[this->unit] + b.value * multby[this->unit];
@@ -64,6 +64,25 @@ const PhysicalNumber PhysicalNumber::operator++(int)
     return (*this);
   }
 
-  //friend bool operator==(const PhysicalNumber &lhs, const PhysicalNumber &rhs);
+  bool ariel::operator==(const PhysicalNumber &lhs, const PhysicalNumber &rhs){
+    if(lhs.type!=rhs.type){
+      throw "NOT THE SAME TYPE";
+    }
+    else if(lhs.value==rhs.value){
+      return true;
+    }
+    else{return false;}
+  }
+
+  bool ariel::operator!=(const PhysicalNumber &lhs, const PhysicalNumber &rhs){
+    if(lhs.type!=rhs.type){
+      throw "NOT THE SAME TYPE";
+    }
+    else if(lhs.value!=rhs.value){
+      return true;
+    }
+    else{return false;}
+  }
+
 
 
