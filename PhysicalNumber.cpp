@@ -3,21 +3,21 @@
 using ariel::PhysicalNumber, ariel::Unit;
 using namespace std;
 
-ariel::PhysicalNumber::PhysicalNumber(double value, int unit)
+ariel::PhysicalNumber::PhysicalNumber(double value, Unit unit)
 {
   this->value = value;
   this->unit = unit;
-  if (unit < 3)
+  if (unit < Unit::SEC)
   {
-    type = "length";
+    type = 'l';
   }
-  else if (unit < 6 && unit > 2)
+  else if (unit < Unit::G && unit > Unit::KM)
   {
-    type = "time";
+    type = 't';
   }
-  else if (unit > 5)
+  else if (unit > Unit::HOUR)
   {
-    type = "weight";
+    type = 'w';
   }
 }
 
@@ -29,18 +29,11 @@ PhysicalNumber PhysicalNumber::operator+(const PhysicalNumber &b)
   }
 
   int val = this->value * multby[this->unit] + b.value * multby[this->unit];
-  string t = this->type;
-  if (MAX(this->unit, b->unit) < 8)
-  {
-    if (val > multby[this->unit + 1] && (val < 1000))
-    {
-      int unit = this->unit + 1;
-    }
-    else
-    {
-      int unit = this->unit;
-    }
-    PhysicalNumber pn = new (val, Unit);
-    return pn;
-  }
+  char t = this->type;
+  Unit unit = this->unit;
+
+  PhysicalNumber pn = PhysicalNumber(val, unit);
+  return pn;
 }
+
+
