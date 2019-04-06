@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstdio>
 
-namespace std
+namespace ariel
 {
 
 enum class Unit
@@ -17,7 +17,6 @@ enum class Unit
     TON
 };
 
-long multby[]={1,100,1000,1,60,3600,1,1000,1000000};
+long multby[] = {1, 100, 1000, 1, 60, 3600, 1, 1000, 1000000};
 
-
-} // namespace std
+} // namespace ariel
