@@ -21,7 +21,8 @@ public:
 public:
   /*** Constructor ***/
   PhysicalNumber(double value, Unit unit);
-  
+  Unit getUnit(const string s);
+
   /*** Arithmetic Operators ***/
   // +
   PhysicalNumber operator+(const PhysicalNumber &pnum);
