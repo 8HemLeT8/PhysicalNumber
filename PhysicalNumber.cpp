@@ -84,5 +84,49 @@ const PhysicalNumber PhysicalNumber::operator++(int)
     else{return false;}
   }
 
+ bool ariel::operator>(const PhysicalNumber &lhs, const PhysicalNumber &rhs){
+   if(lhs.type!=rhs.type){
+      throw "NOT THE SAME TYPE";
+    }
+    else if(lhs.value>rhs.value){
+      return true;
+    }
+    else{return false;}
+ }
+  // >
+ bool ariel::operator<(const PhysicalNumber &lhs, const PhysicalNumber &rhs){
+   if(lhs.type!=rhs.type){
+      throw "NOT THE SAME TYPE";
+    }
+    else if(lhs.value<rhs.value){
+      return true;
+    }
+    else{return false;}
+ }
+
+ bool ariel::operator>=(const PhysicalNumber &lhs, const PhysicalNumber &rhs){
+   if(lhs.type!=rhs.type){
+      throw "NOT THE SAME TYPE";
+    }
+    else if(lhs.value>=rhs.value){
+      return true;
+    }
+    else{return false;}
+ }
+  // <=
+bool ariel::operator<=(const PhysicalNumber &lhs, const PhysicalNumber &rhs){
+  if(lhs.type!=rhs.type){
+      throw "NOT THE SAME TYPE";
+    }
+    else if(lhs.value<=rhs.value){
+      return true;
+    }
+    else{return false;}
+}
+
+ istream &operator>>(istream &in, PhysicalNumber &pnum){
+   in.tellg;
+ }
+
 
 
