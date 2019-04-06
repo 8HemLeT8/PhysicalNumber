@@ -7,13 +7,15 @@ namespace ariel
 {
 class PhysicalNumber
 {
-private:
+public:
   double value;
   char type;
   Unit unit;
 
 public:
+  /*** Constructor ***/
   PhysicalNumber(double value, Unit unit);
+  
   /*** Arithmetic Operators ***/
   // +
   PhysicalNumber operator+(const PhysicalNumber &pnum);
