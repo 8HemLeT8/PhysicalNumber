@@ -35,5 +35,35 @@ PhysicalNumber PhysicalNumber::operator+(const PhysicalNumber &b)
   PhysicalNumber pn = PhysicalNumber(val, unit);
   return pn;
 }
+const PhysicalNumber PhysicalNumber::operator+() const{
+  return *this;
+}
+const PhysicalNumber PhysicalNumber::operator-() const{
+  return PhysicalNumber(-(this->value),this->unit);
+}
+
+//x++
+const PhysicalNumber PhysicalNumber::operator++(int)
+{
+  int val = this->value;
+  this->value = this->value + 1;
+  return PhysicalNumber(val,this->unit);
+
+}
+
+//++x
+ PhysicalNumber& PhysicalNumber::operator++()
+{
+  int val = this->value + 1;
+  PhysicalNumber pn =PhysicalNumber(val, this->unit);
+  return pn;
+}
+
+  PhysicalNumber& PhysicalNumber::operator+=(const PhysicalNumber &pnum){
+    this->value=this->value+pnum.value;
+    return (*this);
+  }
+
+  //friend bool operator==(const PhysicalNumber &lhs, const PhysicalNumber &rhs);
 
 

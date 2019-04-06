@@ -26,7 +26,7 @@ public:
   const PhysicalNumber operator-() const;
   /*** Post/Pre Operators ***/
   // post ++
-  const PhysicalNumber operator++(int);
+   const PhysicalNumber operator++(int);
   // post --
   const PhysicalNumber operator--(int);
   // ++ pre
