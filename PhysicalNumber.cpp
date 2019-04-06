@@ -1,5 +1,4 @@
 #include "PhysicalNumber.h"
-
 using ariel::PhysicalNumber, ariel::Unit;
 using namespace std;
 
@@ -20,51 +19,97 @@ ariel::PhysicalNumber::PhysicalNumber(double value, Unit unit)
     type = 'w';
   }
 }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-PhysicalNumber PhysicalNumber::operator+(const PhysicalNumber &b)
+PhysicalNumber PhysicalNumber::operator+(const PhysicalNumber &pnum)
 {
-  if (this->type != b.type)
+  if (this->type != pnum.type)
   {
     throw "NOT THE SAME TYPE";
   }
 
-  int val = this->value * multby[this->unit] + b.value * multby[this->unit];
+  int val = this->value * multby[this->unit] + pnum.value * multby[this->unit];
   char t = this->type;
   Unit unit = this->unit;
 
   PhysicalNumber pn = PhysicalNumber(val, unit);
   return pn;
 }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+PhysicalNumber PhysicalNumber::operator-(const PhysicalNumber &pnum)
+{
+  if (this->type != pnum.type)
+  {
+    throw "NOT THE SAME TYPE";
+  }
+
+  int val = this->value * multby[this->unit] - pnum.value * multby[this->unit];
+  char t = this->type;
+  Unit unit = this->unit;
+
+  PhysicalNumber pn = PhysicalNumber(val, unit);
+  return pn;
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 const PhysicalNumber PhysicalNumber::operator+() const
 {
   return *this;
 }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 const PhysicalNumber PhysicalNumber::operator-() const
 {
   return PhysicalNumber(-(this->value), this->unit);
 }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//x++
 const PhysicalNumber PhysicalNumber::operator++(int)
 {
   int val = this->value;
-  this->value = this->value + 1;
+  this->value = this->value + 1 * multby[this->unit];
   return PhysicalNumber(val, this->unit);
 }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//++x
 PhysicalNumber &PhysicalNumber::operator++()
 {
-  int val = this->value + 1;
+  int val = this->value + 1 * multby[this->unit];
   PhysicalNumber pn = PhysicalNumber(val, this->unit);
   return pn;
 }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const PhysicalNumber PhysicalNumber::operator--(int)
+{
+  int val = this->value;
+  this->value = this->value - 1 * multby[this->unit];
+  return PhysicalNumber(val, this->unit);
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+PhysicalNumber &PhysicalNumber::operator--()
+{
+  int val = this->value - 1 * multby[this->unit];
+  PhysicalNumber pn = PhysicalNumber(val, this->unit);
+  return pn;
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 PhysicalNumber &PhysicalNumber::operator+=(const PhysicalNumber &pnum)
 {
-  this->value = this->value + pnum.value;
+  this->value = this->value + (pnum.value*multby[pnum.unit]);
   return (*this);
 }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+PhysicalNumber &PhysicalNumber::operator-=(const PhysicalNumber &pnum)
+{
+  this->value = this->value - (pnum.value * multby[pnum.unit]);
+  return (*this);
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 bool ariel::operator==(const PhysicalNumber &lhs, const PhysicalNumber &rhs)
 {
@@ -81,6 +126,23 @@ bool ariel::operator==(const PhysicalNumber &lhs, const PhysicalNumber &rhs)
     return false;
   }
 }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+bool ariel::operator!=(const PhysicalNumber &lhs, const PhysicalNumber &rhs)
+{
+  if (lhs.type != rhs.type)
+  {
+    throw "NOT THE SAME TYPE";
+  }
+  else if (lhs.value != rhs.value)
+  {
+    return true;
+  }
+  else
+  {
+    return false;
+  }
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
 
  bool ariel::operator>(const PhysicalNumber &lhs, const PhysicalNumber &rhs){
    if(lhs.type!=rhs.type){
@@ -91,7 +153,7 @@ bool ariel::operator==(const PhysicalNumber &lhs, const PhysicalNumber &rhs)
     }
     else{return false;}
  }
-  // >
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
  bool ariel::operator<(const PhysicalNumber &lhs, const PhysicalNumber &rhs){
    if(lhs.type!=rhs.type){
       throw "NOT THE SAME TYPE";
@@ -101,6 +163,7 @@ bool ariel::operator==(const PhysicalNumber &lhs, const PhysicalNumber &rhs)
     }
     else{return false;}
  }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
 
  bool ariel::operator>=(const PhysicalNumber &lhs, const PhysicalNumber &rhs){
    if(lhs.type!=rhs.type){
@@ -111,7 +174,7 @@ bool ariel::operator==(const PhysicalNumber &lhs, const PhysicalNumber &rhs)
     }
     else{return false;}
  }
-  // <=
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
 bool ariel::operator<=(const PhysicalNumber &lhs, const PhysicalNumber &rhs){
   if(lhs.type!=rhs.type){
       throw "NOT THE SAME TYPE";
@@ -121,11 +184,19 @@ bool ariel::operator<=(const PhysicalNumber &lhs, const PhysicalNumber &rhs){
     }
     else{return false;}
 }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
 
  istream &operator>>(istream &in, PhysicalNumber &pnum){
-   in.tellg;
+   string a = in.get;
+   a=a.substr(0,a.length-1);
+  istringstream iss(a);
+  copy(istream_iterator<string>(iss),
+         istream_iterator<string>(),
+         back_inserter("["));
+         
  }
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 ostream &ariel::operator<<(ostream &out, const PhysicalNumber &pnum)
 {

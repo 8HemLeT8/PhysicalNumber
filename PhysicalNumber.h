@@ -1,5 +1,7 @@
 #pragma once
 #include <string>
+#include <sstream>
+#include <iterator>
 #include "Unit.h"
 using std::string, ariel::Unit, std::ostream, std::istream;
 
