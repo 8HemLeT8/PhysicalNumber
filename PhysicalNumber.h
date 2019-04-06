@@ -2,7 +2,11 @@
 #include <string>
 #include <sstream>
 #include <iterator>
+#include <vector>
+#include <algorithm>
+#include <map>
 #include "Unit.h"
+
 using std::string, ariel::Unit, std::ostream, std::istream;
 
 namespace ariel
