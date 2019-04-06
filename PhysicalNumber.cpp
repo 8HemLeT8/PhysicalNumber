@@ -210,7 +210,7 @@ bool ariel::operator<=(const PhysicalNumber &lhs, const PhysicalNumber &rhs)
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 Unit getUnit(const string s){
-  static map<s, Unit> string2unit{
+  static map<string, Unit> string2unit{
        { "CM", ariel::CM }, 
        { "M", ariel::M },
        { "KM", ariel::KM }, 
