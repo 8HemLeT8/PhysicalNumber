@@ -2,6 +2,9 @@
 using ariel::PhysicalNumber, ariel::Unit;
 using namespace std;
 
+long multby[9] = {1, 100, 1000, 1, 60, 3600, 1, 1000, 1000000};
+
+
 ariel::PhysicalNumber::PhysicalNumber(double value, Unit unit)
 {
   this->value = value;
@@ -27,7 +30,7 @@ PhysicalNumber PhysicalNumber::operator+(const PhysicalNumber &pnum)
   {
     throw "NOT THE SAME TYPE";
   }
-
+  
   int val = this->value * multby[this->unit] + pnum.value * multby[this->unit];
   char t = this->type;
   Unit unit = this->unit;
@@ -262,31 +265,31 @@ ostream &ariel::operator<<(ostream &out, const PhysicalNumber &pnum)
   switch (pnum.unit)
   {
   case Unit::CM:
-    out << pnum.value << "[cm]" << endl;
+    out << pnum.value << "[cm]";
     break;
   case Unit::M:
-    out << pnum.value << "[m]" << endl;
+    out << pnum.value << "[m]";
     break;
   case Unit::KM:
-    out << pnum.value << "[km]" << endl;
+    out << pnum.value << "[km]";
     break;
   case Unit::SEC:
-    out << pnum.value << "[sec]" << endl;
+    out << pnum.value << "[sec]";
     break;
   case Unit::MIN:
-    out << pnum.value << "[min]" << endl;
+    out << pnum.value << "[min]";
     break;
   case Unit::HOUR:
-    out << pnum.value << "[hour]" << endl;
+    out << pnum.value << "[hour]";
     break;
   case Unit::G:
-    out << pnum.value << "[g]" << endl;
+    out << pnum.value << "[g]";
     break;
   case Unit::KG:
-    out << pnum.value << "[kg]" << endl;
+    out << pnum.value << "[kg]";
     break;
   case Unit::TON:
-    out << pnum.value << "[ton]" << endl;
+    out << pnum.value << "[ton]";
     break;
   }
   return out;
