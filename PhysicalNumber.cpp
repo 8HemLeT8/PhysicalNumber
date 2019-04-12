@@ -35,8 +35,8 @@ PhysicalNumber PhysicalNumber::operator+(const PhysicalNumber &pnum) const
   
   Unit unitA = this->unit;
   val=val/multby[unitA];
-  PhysicalNumber pn = PhysicalNumber(val, unitA);
-  return pn;
+  return PhysicalNumber(val, unitA);
+  
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -51,8 +51,8 @@ PhysicalNumber PhysicalNumber::operator-(const PhysicalNumber &pnum) const
   Unit unitA = this->unit;
   val=val/multby[unitA];
 
-  PhysicalNumber pn = PhysicalNumber(val, unit);
-  return pn;
+  return PhysicalNumber(val, unit);
+  
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
