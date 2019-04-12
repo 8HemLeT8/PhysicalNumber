@@ -131,7 +131,7 @@ bool ariel::operator==(const PhysicalNumber &lhs, const PhysicalNumber &rhs)
   {
     throw "NOT THE SAME TYPE";
   }
-  else if (lhs.value == rhs.value)
+  else if (lhs.value*multby[lhs.unit] == rhs.value*multby[rhs.unit])
   {
     return true;
   }
@@ -147,7 +147,7 @@ bool ariel::operator!=(const PhysicalNumber &lhs, const PhysicalNumber &rhs)
   {
     throw "NOT THE SAME TYPE";
   }
-  else if (lhs.value != rhs.value)
+  else if (lhs.value*multby[lhs.unit] != rhs.value*multby[rhs.unit])
   {
     return true;
   }
@@ -164,7 +164,7 @@ bool ariel::operator>(const PhysicalNumber &lhs, const PhysicalNumber &rhs)
   {
     throw "NOT THE SAME TYPE";
   }
-  else if (lhs.value > rhs.value)
+  else if (lhs.value*multby[lhs.unit] > rhs.value*multby[rhs.unit])
   {
     return true;
   }
@@ -180,7 +180,7 @@ bool ariel::operator<(const PhysicalNumber &lhs, const PhysicalNumber &rhs)
   {
     throw "NOT THE SAME TYPE";
   }
-  else if (lhs.value < rhs.value)
+  else if (lhs.value*multby[lhs.unit] < rhs.value*multby[rhs.unit])
   {
     return true;
   }
