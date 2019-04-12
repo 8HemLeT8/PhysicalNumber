@@ -27,7 +27,7 @@ public:
   // +
   PhysicalNumber operator+(const PhysicalNumber &pnum) const;
   // -
-  PhysicalNumber operator-(const PhysicalNumber &pnum);
+  PhysicalNumber operator-(const PhysicalNumber &pnum) const;
   /*** Unary Operators ***/
   // unary +
   const PhysicalNumber operator+() const;
@@ -35,9 +35,9 @@ public:
   const PhysicalNumber operator-() const;
   /*** Post/Pre Operators ***/
   // post ++
- const PhysicalNumber operator++(int);
+  const PhysicalNumber operator++(int);
   // post --
- const PhysicalNumber operator--(int);
+  const PhysicalNumber operator--(int);
   // ++ pre
   PhysicalNumber &operator++();
   // -- pre
