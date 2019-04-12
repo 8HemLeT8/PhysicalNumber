@@ -4,7 +4,6 @@ using namespace std;
 //                cm, m,   km   s  min hour  g  kg    ton
 long multby[9] = {1, 100, 100000, 1, 60, 3600, 1, 1000, 1000000};
 
-
 ariel::PhysicalNumber::PhysicalNumber(double value, Unit unit)
 {
   this->value = value;
@@ -30,13 +29,12 @@ const PhysicalNumber PhysicalNumber::operator+(const PhysicalNumber &pnum) const
   {
     throw "NOT THE SAME TYPE";
   }
-  
+
   double val = (this->value * multby[this->unit]) + (pnum.value * multby[pnum.unit]);
-  
+
   Unit unitA = this->unit;
-  val=val/multby[unitA];
+  val = val / multby[unitA];
   return PhysicalNumber(val, unitA);
-  
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -49,10 +47,9 @@ const PhysicalNumber PhysicalNumber::operator-(const PhysicalNumber &pnum) const
 
   double val = this->value * multby[this->unit] - pnum.value * multby[pnum.unit];
   Unit unitA = this->unit;
-  val=val/multby[unitA];
+  val = val / multby[unitA];
 
   return PhysicalNumber(val, unit);
-  
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -71,7 +68,7 @@ const PhysicalNumber PhysicalNumber::operator-() const
 const PhysicalNumber PhysicalNumber::operator++(int)
 {
   double val = this->value;
-  this->value = this->value*multby[this->unit] + 1 * multby[this->unit];
+  this->value = this->value * multby[this->unit] + 1 * multby[this->unit];
   this->value /= multby[this->unit];
   return PhysicalNumber(val, this->unit);
 }
@@ -79,7 +76,7 @@ const PhysicalNumber PhysicalNumber::operator++(int)
 
 PhysicalNumber &PhysicalNumber::operator++()
 {
-  this->value = this->value*multby[this->unit] + 1 * multby[this->unit];
+  this->value = this->value * multby[this->unit] + 1 * multby[this->unit];
   this->value /= multby[this->unit];
   return *this;
 }
@@ -88,7 +85,7 @@ PhysicalNumber &PhysicalNumber::operator++()
 const PhysicalNumber PhysicalNumber::operator--(int)
 {
   double val = this->value;
-  this->value = this->value*multby[this->unit] - 1 * multby[this->unit];
+  this->value = this->value * multby[this->unit] - 1 * multby[this->unit];
   this->value /= multby[this->unit];
   return PhysicalNumber(val, this->unit);
 }
@@ -96,7 +93,7 @@ const PhysicalNumber PhysicalNumber::operator--(int)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 PhysicalNumber &PhysicalNumber::operator--()
 {
-  this->value = this->value*multby[this->unit] - 1 * multby[this->unit];
+  this->value = this->value * multby[this->unit] - 1 * multby[this->unit];
   this->value /= multby[this->unit];
   return *this;
 }
@@ -118,7 +115,7 @@ PhysicalNumber &PhysicalNumber::operator-=(const PhysicalNumber &pnum)
 {
   if (this->type != pnum.type)
   {
-  throw "NOT THE SAME TYPE";
+    throw "NOT THE SAME TYPE";
   }
   this->value = this->value * multby[this->unit] - (pnum.value * multby[pnum.unit]);
   this->value /= multby[this->unit];
@@ -133,7 +130,7 @@ bool ariel::operator==(const PhysicalNumber &lhs, const PhysicalNumber &rhs)
   {
     throw "NOT THE SAME TYPE";
   }
-  else if (lhs.value*multby[lhs.unit] == rhs.value*multby[rhs.unit])
+  else if (lhs.value * multby[lhs.unit] == rhs.value * multby[rhs.unit])
   {
     return true;
   }
@@ -149,7 +146,7 @@ bool ariel::operator!=(const PhysicalNumber &lhs, const PhysicalNumber &rhs)
   {
     throw "NOT THE SAME TYPE";
   }
-  else if (lhs.value*multby[lhs.unit] != rhs.value*multby[rhs.unit])
+  else if (lhs.value * multby[lhs.unit] != rhs.value * multby[rhs.unit])
   {
     return true;
   }
@@ -166,7 +163,7 @@ bool ariel::operator>(const PhysicalNumber &lhs, const PhysicalNumber &rhs)
   {
     throw "NOT THE SAME TYPE";
   }
-  else if (lhs.value*multby[lhs.unit] > rhs.value*multby[rhs.unit])
+  else if (lhs.value * multby[lhs.unit] > rhs.value * multby[rhs.unit])
   {
     return true;
   }
@@ -182,7 +179,7 @@ bool ariel::operator<(const PhysicalNumber &lhs, const PhysicalNumber &rhs)
   {
     throw "NOT THE SAME TYPE";
   }
-  else if (lhs.value*multby[lhs.unit] < rhs.value*multby[rhs.unit])
+  else if (lhs.value * multby[lhs.unit] < rhs.value * multby[rhs.unit])
   {
     return true;
   }
@@ -192,14 +189,13 @@ bool ariel::operator<(const PhysicalNumber &lhs, const PhysicalNumber &rhs)
   }
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 bool ariel::operator>=(const PhysicalNumber &lhs, const PhysicalNumber &rhs)
 {
   if (lhs.type != rhs.type)
   {
     throw "NOT THE SAME TYPE";
   }
-  else if (lhs.value >= rhs.value)
+  else if (lhs.value * multby[lhs.unit] >= rhs.value * multby[rhs.unit])
   {
     return true;
   }
@@ -215,7 +211,7 @@ bool ariel::operator<=(const PhysicalNumber &lhs, const PhysicalNumber &rhs)
   {
     throw "NOT THE SAME TYPE";
   }
-  else if (lhs.value <= rhs.value)
+  else if (lhs.value * multby[lhs.unit] <= rhs.value * multby[rhs.unit])
   {
     return true;
   }
@@ -225,32 +221,35 @@ bool ariel::operator<=(const PhysicalNumber &lhs, const PhysicalNumber &rhs)
   }
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
-Unit getUnit(const string s){
+Unit getUnit(const string s)
+{
   static map<string, Unit> string2unit{
-       { "CM", ariel::CM }, 
-       { "M", ariel::M },
-       { "KM", ariel::KM }, 
-       { "SEC", ariel::SEC },
-       { "MIN", ariel::MIN },
-       { "HOUR", ariel::HOUR }, 
-       { "G", ariel::G },
-       { "KG", ariel::KG },
-       { "TON", ariel::TON },  
-    
+      {"CM", ariel::CM},
+      {"M", ariel::M},
+      {"KM", ariel::KM},
+      {"SEC", ariel::SEC},
+      {"MIN", ariel::MIN},
+      {"HOUR", ariel::HOUR},
+      {"G", ariel::G},
+      {"KG", ariel::KG},
+      {"TON", ariel::TON},
+
   };
   auto x = string2unit.find(s);
-    if(x != end(string2unit)) {
-        return x->second;
-    }
-    throw invalid_argument(s);
+  if (x != end(string2unit))
+  {
+    return x->second;
+  }
+  throw invalid_argument(s);
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 istream &ariel::operator>>(istream &in, PhysicalNumber &pnum)
 {
-  string a ;
-  in>>a;
-  if(a.find("]")==-1||a.find("[")==-1||a.find("[]")){
+  string a;
+  in >> a;
+  if (a.find("]") == -1 || a.find("[") == -1 || a.find("[]")!=-1)
+  {
     return in;
   }
   a = a.substr(0, a.length() - 1);
@@ -263,16 +262,27 @@ istream &ariel::operator>>(istream &in, PhysicalNumber &pnum)
     getline(ss, substr, '[');
     result.push_back(substr);
   }
-  double val = stod(result[0]);
-  transform(result[1].begin(), result[1].end(),result[1].begin(), ::toupper);
-
-  
+  double val=0;
+  try
+  {
+    val = stod(result[0]);
+    transform(result[1].begin(), result[1].end(), result[1].begin(), ::toupper);
+  }
+  catch(...)
+  {
+    return in;
+  }
+  Unit u =Unit::CM;
   const string unt = result[1];
-  Unit u = getUnit(unt);
+  try{
+  u = getUnit(unt);
+  }
+  catch(...){
+    return in;
+  }
 
-  pnum = PhysicalNumber(val,u);
+  pnum = PhysicalNumber(val, u);
   return in;
-
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
