@@ -2,7 +2,7 @@
 using ariel::PhysicalNumber, ariel::Unit;
 using namespace std;
 //                cm, m,   km   s  min hour  g  kg    ton
-long multby[9] = {1, 100, 1000, 1, 60, 3600, 1, 1000, 1000000};
+long multby[9] = {1, 100, 100000, 1, 60, 3600, 1, 1000, 1000000};
 
 
 ariel::PhysicalNumber::PhysicalNumber(double value, Unit unit)
@@ -31,12 +31,11 @@ PhysicalNumber PhysicalNumber::operator+(const PhysicalNumber &pnum)
     throw "NOT THE SAME TYPE";
   }
   
-  int val = this->value * multby[this->unit] + pnum.value * multby[pnum.unit];
+  double val = (this->value * multby[this->unit]) + (pnum.value * multby[pnum.unit]);
   
-  char t = this->type;
-  Unit unit = this->unit;
-  val/=unit;
-  PhysicalNumber pn = PhysicalNumber(val, unit);
+  Unit unitA = this->unit;
+  val=val/multby[unitA];
+  PhysicalNumber pn = PhysicalNumber(val, unitA);
   return pn;
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -48,9 +47,9 @@ PhysicalNumber PhysicalNumber::operator-(const PhysicalNumber &pnum)
     throw "NOT THE SAME TYPE";
   }
 
-  int val = this->value * multby[this->unit] - pnum.value * multby[this->unit];
-  char t = this->type;
-  Unit unit = this->unit;
+  double val = this->value * multby[this->unit] - pnum.value * multby[pnum.unit];
+  Unit unitA = this->unit;
+  val=val/multby[unitA];
 
   PhysicalNumber pn = PhysicalNumber(val, unit);
   return pn;
@@ -71,7 +70,7 @@ const PhysicalNumber PhysicalNumber::operator-() const
 
 const PhysicalNumber PhysicalNumber::operator++(int)
 {
-  int val = this->value;
+  double val = this->value;
   this->value = this->value + 1 * multby[this->unit];
   return PhysicalNumber(val, this->unit);
 }
@@ -79,7 +78,7 @@ const PhysicalNumber PhysicalNumber::operator++(int)
 
 PhysicalNumber &PhysicalNumber::operator++()
 {
-  int val = this->value + 1 * multby[this->unit];
+  double val = this->value + 1 * multby[this->unit];
   PhysicalNumber pn = PhysicalNumber(val, this->unit);
   return pn;
 }
@@ -87,7 +86,7 @@ PhysicalNumber &PhysicalNumber::operator++()
 
 const PhysicalNumber PhysicalNumber::operator--(int)
 {
-  int val = this->value;
+  double val = this->value;
   this->value = this->value - 1 * multby[this->unit];
   return PhysicalNumber(val, this->unit);
 }
@@ -95,7 +94,7 @@ const PhysicalNumber PhysicalNumber::operator--(int)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 PhysicalNumber &PhysicalNumber::operator--()
 {
-  int val = this->value - 1 * multby[this->unit];
+  double val = this->value - 1 * multby[this->unit];
   PhysicalNumber pn = PhysicalNumber(val, this->unit);
   return pn;
 }
@@ -108,7 +107,7 @@ PhysicalNumber &PhysicalNumber::operator+=(const PhysicalNumber &pnum)
     throw "NOT THE SAME TYPE";
   }
   this->value = this->value * multby[this->unit] + (pnum.value * multby[pnum.unit]);
-  this->value /= this->unit;
+  this->value /= multby[this->unit];
   return (*this);
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -120,7 +119,7 @@ PhysicalNumber &PhysicalNumber::operator-=(const PhysicalNumber &pnum)
   throw "NOT THE SAME TYPE";
   }
   this->value = this->value * multby[this->unit] - (pnum.value * multby[pnum.unit]);
-  this->value /= this->unit;
+  this->value /= multby[this->unit];
 
   return (*this);
 }
@@ -241,7 +240,7 @@ Unit getUnit(const string s){
     if(x != end(string2unit)) {
         return x->second;
     }
-    throw invalid_argument("s");
+    throw invalid_argument(s);
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -259,7 +258,7 @@ istream &ariel::operator>>(istream &in, PhysicalNumber &pnum)
     getline(ss, substr, '[');
     result.push_back(substr);
   }
-  double val = stoi(result[0]);
+  double val = stod(result[0]);
   transform(result[1].begin(), result[1].end(),result[1].begin(), ::toupper);
 
   
