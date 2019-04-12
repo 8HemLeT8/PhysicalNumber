@@ -250,6 +250,9 @@ istream &ariel::operator>>(istream &in, PhysicalNumber &pnum)
 {
   string a ;
   in>>a;
+  if(a.find("]")==-1||a.find("[")==-1||a.find("[]")){
+    return in;
+  }
   a = a.substr(0, a.length() - 1);
   stringstream ss(a);
   vector<string> result;
