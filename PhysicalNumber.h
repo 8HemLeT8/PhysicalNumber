@@ -25,9 +25,9 @@ public:
 
   /*** Arithmetic Operators ***/
   // +
-  PhysicalNumber operator+(const PhysicalNumber &pnum) const;
+  const PhysicalNumber operator+(const PhysicalNumber &pnum) const;
   // -
-  PhysicalNumber operator-(const PhysicalNumber &pnum) const;
+  const PhysicalNumber operator-(const PhysicalNumber &pnum) const;
   /*** Unary Operators ***/
   // unary +
   const PhysicalNumber operator+() const;

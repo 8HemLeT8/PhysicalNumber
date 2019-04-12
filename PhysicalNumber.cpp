@@ -24,7 +24,7 @@ ariel::PhysicalNumber::PhysicalNumber(double value, Unit unit)
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-PhysicalNumber PhysicalNumber::operator+(const PhysicalNumber &pnum) const
+const PhysicalNumber PhysicalNumber::operator+(const PhysicalNumber &pnum) const
 {
   if (this->type != pnum.type)
   {
@@ -40,7 +40,7 @@ PhysicalNumber PhysicalNumber::operator+(const PhysicalNumber &pnum) const
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-PhysicalNumber PhysicalNumber::operator-(const PhysicalNumber &pnum) const
+const PhysicalNumber PhysicalNumber::operator-(const PhysicalNumber &pnum) const
 {
   if (this->type != pnum.type)
   {
