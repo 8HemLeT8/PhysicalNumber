@@ -79,9 +79,9 @@ const PhysicalNumber PhysicalNumber::operator++(int)
 
 PhysicalNumber &PhysicalNumber::operator++()
 {
-  double val = this->value + 1 * multby[this->unit];
-  PhysicalNumber pn = PhysicalNumber(val, this->unit);
-  return pn;
+  this->value = this->value*multby[this->unit] + 1 * multby[this->unit];
+  this->value /= multby[this->unit];
+  return *this;
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -96,9 +96,9 @@ const PhysicalNumber PhysicalNumber::operator--(int)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 PhysicalNumber &PhysicalNumber::operator--()
 {
-  double val = this->value - 1 * multby[this->unit];
-  PhysicalNumber pn = PhysicalNumber(val, this->unit);
-  return pn;
+  this->value = this->value*multby[this->unit] - 1 * multby[this->unit];
+  this->value /= multby[this->unit];
+  return *this;
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
