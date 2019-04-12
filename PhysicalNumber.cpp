@@ -1,7 +1,7 @@
 #include "PhysicalNumber.h"
 using ariel::PhysicalNumber, ariel::Unit;
 using namespace std;
-
+//                cm, m,   km   s  min hour  g  kg    ton
 long multby[9] = {1, 100, 1000, 1, 60, 3600, 1, 1000, 1000000};
 
 
@@ -31,10 +31,11 @@ PhysicalNumber PhysicalNumber::operator+(const PhysicalNumber &pnum)
     throw "NOT THE SAME TYPE";
   }
   
-  int val = this->value * multby[this->unit] + pnum.value * multby[this->unit];
+  int val = this->value * multby[this->unit] + pnum.value * multby[pnum.unit];
+  
   char t = this->type;
   Unit unit = this->unit;
-
+  val/=unit;
   PhysicalNumber pn = PhysicalNumber(val, unit);
   return pn;
 }
@@ -102,14 +103,25 @@ PhysicalNumber &PhysicalNumber::operator--()
 
 PhysicalNumber &PhysicalNumber::operator+=(const PhysicalNumber &pnum)
 {
-  this->value = this->value + (pnum.value * multby[pnum.unit]);
+  if (this->type != pnum.type)
+  {
+    throw "NOT THE SAME TYPE";
+  }
+  this->value = this->value * multby[this->unit] + (pnum.value * multby[pnum.unit]);
+  this->value /= this->unit;
   return (*this);
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 PhysicalNumber &PhysicalNumber::operator-=(const PhysicalNumber &pnum)
 {
-  this->value = this->value - (pnum.value * multby[pnum.unit]);
+  if (this->type != pnum.type)
+  {
+  throw "NOT THE SAME TYPE";
+  }
+  this->value = this->value * multby[this->unit] - (pnum.value * multby[pnum.unit]);
+  this->value /= this->unit;
+
   return (*this);
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
