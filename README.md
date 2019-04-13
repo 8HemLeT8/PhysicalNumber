@@ -1,6 +1,10 @@
-# PhysicalNumber
+# PhysicalNumber!
 
-Barel Kantsepolsky
+### 3 Types of numbers:
+* Length
+* Weight 
+* Time
 
+&copy; Barel Kantsepolsky
 
-Feras Daragma
+&copy; Feras Daragma
